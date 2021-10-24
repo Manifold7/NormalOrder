@@ -10,10 +10,20 @@ FermionNormalOrder::usage = "FermionNoramlOrder[a] calculate normal order for fe
 c::usage = "Fermionic Operator"
 d::usage = "Creation operators"
 o::usage = "Annihilation operators"
+Commutator::usage = "Commutator [...[[a,b],c],d,...]"
+AntiCommutator::usage = "Anticommutator {...{{a,b},c},d,...}"
 
 
 
 Begin["`Private`"]
+
+(*Commutator[a,b]=a**b-b**a*)
+Commutator[a__,b_]:=Commutator[a]**b-b**Commutator[a];
+Commutator[a_]:=a;
+(*AntiCommutator[a,b]=a**b-b**a*)
+AntiCommutator[a__,b_]:=AntiCommutator[a]**b+b**AntiCommutator[a];
+AntiCommutator[a_]:=a;
+
 
 (*Calculate normal order for 'pure' fermionic operator term.*)
 norderF[]:=1;
